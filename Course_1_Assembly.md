@@ -42,5 +42,11 @@ awk '$1 ~/S/ {print ">"$2"\n"$3}' hifiasm.assembly.bp.p_ctg.gfa > hifiasm.assemb
 
 [Flye](https://github.com/fenderglass/Flye) 
 ```sh
-
+conda create -n flye_env
+conda activate flye_env
+conda install -c bioconda flye
+```
+```
+flye -t 2 -o flye_default --pacbio-hifi hifi_reads.fasta.gz 
+cp flye_default/assembly.fasta flye_assembly.fasta
 ```
