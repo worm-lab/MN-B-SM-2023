@@ -2,14 +2,54 @@
 
 ## Short-read assembly
 
+### Quality control and adapter trimming 
+
+[FastQC](https://github.com/s-andrews/FastQC)
+```sh
+conda create -n fastqc_env 
+conda activate fastqc_env
+conda install -c bioconda fastqc
+```
+```sh
+mkdir fastqc_raw
+fastqc -o fastqc_raw SRR11849223_1.fastq.gz SRR11849223_2.fastq.gz
+```
+
+[TrimGalore](https://github.com/FelixKrueger/TrimGalore)
+```sh
+conda create -n trimgalore_env
+conda activate trimgalore_env
+conda install -c bioconda trim-galore
+```
+```sh
+trim_galore --paired --fastqc --gzip -j 8 SRR11849223_1.fastq.gz SRR11849223_2.fastq.gz
+```
+
+### Genome assembly
+
+[idba](https://github.com/loneknightpy/idba)
+```sh
+conda create -n idba_env
+conda activate idba_env
+conda install -c bioconda idba
+```
+```sh
+gunzip -k SRR11849223_1_val_1.fq.gz
+gunzip -k SRR11849223_2_val_2.fq.gz
+
+fq2fa --merge SRR11849223_1_val_1.fq SRR11849223_2_val_2.fq SRR11849223.fasta
+
+idba -l SRR11849223.fasta -o idba_SRR11849223 --num_threads 8
+```
+
 ## Long-read assembly
 
 ### Preliminary analyses 
 
 *k*-mer analyses: [KAT](https://github.com/TGAC/KAT)
 ```sh
-kat hist -t 2 -o kat_hist hifi_reads.fasta.gz
-kat gcp -t 2 -o kat_gcp hifi_reads.fasta.gz
+kat hist -t 8 -o kat_hist hifi_reads.fasta.gz
+kat gcp -t 8 -o kat_gcp hifi_reads.fasta.gz
 ```
 
 Distribution: [Nanoplot](https://github.com/wdecoster/NanoPlot)
@@ -19,7 +59,7 @@ conda activate nanoplot_env
 conda install -c bioconda nanoplot_env
 ```
 ```sh
-NanoPlot -o nanoplot_hifi -f png --fasta hifi_reads.fasta.gz -t 2
+NanoPlot -o nanoplot_hifi -f png --fasta hifi_reads.fasta.gz -t 8
 ```
 
 ### Genome assembly
