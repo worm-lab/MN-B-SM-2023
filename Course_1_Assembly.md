@@ -27,6 +27,21 @@ conda install -c bioconda trim-galore
 trim_galore --paired --fastqc --gzip -j 8 SRR11849223_1.fastq.gz SRR11849223_2.fastq.gz
 ```
 
+### *k*-mer analyses
+
+[KAT](https://github.com/TGAC/KAT)
+```sh
+conda create -n kat_env
+conda activate kat_env 
+conda install -c bioconda kat
+```
+```sh
+kat hist -t 8 -o kat_hist_SRR11849223 SRR11849223_1_val_1.fq.gz SRR11849223_2_val_2.fq.gz
+kat gcp -t 8 -o kat_gcp_SRR11849223 SRR11849223_1_val_1.fq.gz SRR11849223_2_val_2.fq.gz
+```
+
+<img src="kat_hist_SRR11849223.png" width="450"> <img src="kat_gcp_SRR11849223.mx.png" width="450">
+
 ### Genome assembly
 
 [idba](https://github.com/loneknightpy/idba)
@@ -116,5 +131,12 @@ conda install -c bioconda flye
 ```
 ```
 flye -t 8 -o flye_default --pacbio-hifi hifi_reads.fasta.gz 
-cp flye_default/assembly.fasta flye_assembly.fasta
+cp flye_default/assembly.fasta flye.assembly.fasta
+```
+
+### Assembly statistics 
+
+```sh
+assembly-stats hifiasm.assembly.fasta
+assembly-stats flye.assembly.fasta
 ```
