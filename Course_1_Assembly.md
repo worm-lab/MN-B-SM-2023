@@ -99,7 +99,7 @@ Distribution: [Nanoplot](https://github.com/wdecoster/NanoPlot)
 ```sh
 conda create -n nanoplot_env 
 conda activate nanoplot_env 
-conda install -c bioconda nanoplot_env
+conda install -c bioconda nanoplot
 ```
 ```sh
 NanoPlot -o nanoplot_hifi -f png --fasta hifi_reads.fasta.gz -t 8
