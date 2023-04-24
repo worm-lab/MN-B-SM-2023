@@ -56,7 +56,7 @@ gunzip -k SRR11849223_2_val_2.fq.gz
 
 fq2fa --merge SRR11849223_1_val_1.fq SRR11849223_2_val_2.fq SRR11849223.fasta
 
-idba -l SRR11849223.fasta -o idba_SRR11849223 --num_threads 8
+idba -r SRR11849223.fasta -o idba_SRR11849223 --num_threads 8
 ```
 
 ### Assembly statistics
