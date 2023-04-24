@@ -83,6 +83,8 @@ Gaps = 0
 
 ## Long-read assembly
 
+Reads are available [here](https://uni-koeln.sciebo.de/s/WWQRiObkMPuP4eQ)
+
 ### Preliminary analyses 
 
 *k*-mer analyses: [KAT](https://github.com/TGAC/KAT)
